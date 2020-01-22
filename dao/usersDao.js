@@ -23,7 +23,7 @@ function findUser(userInfo, callback) {
         if (!err) {
             callback({
                 code: 0, // 0 表示成功，1表示失败
-                user: users
+                users: users
             })
         } else {
             callback({

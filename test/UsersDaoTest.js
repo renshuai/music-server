@@ -20,4 +20,12 @@ describe("测试BookDao",function () {
         })
     })
 
+    it("测试查找一个人",function (done) {
+        let user={username:'john',password: 123456};
+        usersDao.findUser(user, function (res) {
+            assert.ok(res.code == 0);
+            done();
+        })
+    })
+
 })

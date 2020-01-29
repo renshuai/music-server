@@ -13,7 +13,8 @@ router.post('/login', function(req, res, next) {
           // 说明用户名和密码正确
           res.json({
             code: 0,
-            msg: '用户名和密码正确'
+            msg: '用户名和密码正确',
+            userId: users[0]['_id']
           })
         } else {
           res.json({
@@ -38,9 +39,11 @@ router.post('/register', function(req, res, next) {
   if (userInfo) {
     usersDao.addUser(userInfo, function (response) {
       if (response.code == 0) {
+        let users = response.users;
         res.json({
           code: 0,
-          msg: '注册成功'
+          msg: '注册成功',
+          userId: users[0]['_id']
         })
       } else if (response.code == 1) {
         res.json({

@@ -4,6 +4,8 @@ var path = require('path');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var albumsRouter = require('./routes/albums');
+var singersRouter = require('./routes/singers');
 
 var app = express();
 
@@ -24,6 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
+app.use('/albums', albumsRouter);
+app.use('/singers', singersRouter);
 
 
 module.exports = app;

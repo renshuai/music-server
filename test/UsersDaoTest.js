@@ -15,14 +15,27 @@ describe("测试BookDao",function () {
     it("测试添加一个人",function (done) {
         let user={username:'john',password: 123456};
         usersDao.addUser(user, function (res) {
-            assert.ok(res.user._id != null);
+            assert.ok(res.code == 0);
             done();
         })
     })
 
     it("测试查找一个人",function (done) {
-        let user={username:'john',password: 123456};
+        let user={username:'123',password: 123456};
         usersDao.findUser(user, function (res) {
+            console.log(res);
+            assert.ok(res.code == 0);
+            done();
+        })
+    })
+
+    it("测试收藏专辑",function (done) {
+        let params = {
+            albumId: '5e314d55f34197f45cfeb3ec',
+            userId: '5e280f4fbdd04b18c0bd8962',
+            type: 0  // 0 收藏，1取消收藏
+        }
+        usersDao.collect(params, function (res) {
             assert.ok(res.code == 0);
             done();
         })

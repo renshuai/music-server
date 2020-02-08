@@ -22,4 +22,28 @@ router.get('/', function(req, res, next) {
     })
 });
 
+router.post('/add', function(req, res, next) {
+    let body = req.body;
+    if (body) {
+        singersDao.addSinger(body,function (response) {
+            res.json(response);
+        })
+    }
+});
+router.delete('/:id', function(req, res, next) {
+    let id = req.params.id;
+    singersDao.deleteSinger(id, function (response) {
+        res.json(response);
+    })
+});
+
+router.post('/update', function(req, res, next) {
+    let body = req.body;
+    if (body) {
+        singersDao.updateSinger(body._id, body,function (response) {
+            res.json(response);
+        })
+    }
+});
+
 module.exports = router;

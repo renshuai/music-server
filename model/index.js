@@ -1,5 +1,9 @@
 const mongoose=require('mongoose')
-let userSchema={username:String,password:String}
+let userSchema={
+    username:String,
+    password:String,
+    collections: Array
+}
 
 
 let albumsSchema={

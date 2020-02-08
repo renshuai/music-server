@@ -16,4 +16,22 @@ function findAllSingers(callback) {
     })
 }
 
-module.exports = {findSingersByName, findAllSingers};
+function addSinger(singer,callback) {
+    let b=  singersModel.create(singer,function (err,newSinger) {
+        if(!err) callback(newSinger.toObject())
+    })
+}
+
+function deleteSinger(id,callback) {
+    singersModel.findByIdAndRemove(id,function (err) {
+        if(!err) callback({})
+    })
+}
+
+function updateSinger(id,singer, callback) {
+    singersModel.findByIdAndUpdate(id, singer, function (err, newSinger) {
+        if(!err) callback(newSinger.toObject())
+    })
+}
+
+module.exports = {findSingersByName, findAllSingers, addSinger, deleteSinger, updateSinger};

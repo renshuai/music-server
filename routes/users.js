@@ -8,13 +8,13 @@ router.post('/login', function(req, res, next) {
   if (userInfo) {
     usersDao.findUser(userInfo, function (response) {
       if (response.code == 0) {
-        let users = response.users;
-        if (users.length) {
+        let user = response.user;
+        if (user) {
           // 说明用户名和密码正确
           res.json({
             code: 0,
             msg: '用户名和密码正确',
-            userId: users[0]['_id']
+            userId: user['_id']
           })
         } else {
           res.json({
@@ -51,6 +51,17 @@ router.post('/register', function(req, res, next) {
           msg: '服务器异常，请稍后再试'
         })
       }
+    })
+  }
+
+
+});
+
+router.post('/collect', function(req, res, next) {
+  let body = req.body;
+  if (body) {
+    usersDao.collect(body, function (response) {
+      res.json(response)
     })
   }
 

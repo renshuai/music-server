@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const usersModel = mongoose.model('user');
+const usersModel = mongoose.model('users');
 
 function addUser(user, callback) {
 
@@ -20,6 +20,22 @@ function addUser(user, callback) {
 
 function findUser(userInfo, callback) {
     usersModel.findOne({username: userInfo.username, password: userInfo.password}).exec(function (err, user) {
+        if (!err) {
+            callback({
+                code: 0, // 0 表示成功，1表示失败
+                user: user
+            })
+        } else {
+            callback({
+                code: 1,
+                msg: err
+            })
+        }
+    })
+}
+
+function findUserById(id, callback) {
+    usersModel.findOne({"_id": id}).exec(function (err, user) {
         if (!err) {
             callback({
                 code: 0, // 0 表示成功，1表示失败
@@ -65,7 +81,8 @@ function collect(info, callback) {
                 }
 
             }
-            usersModel.updateOne({"_id": userId}, {'collections': collections}, function (err, newUser) {
+            console.log(collections);
+            usersModel.update({"_id": userId}, {'collections': collections}, function (err, newUser) {
                 if (!err) {
                     callback({
                         code: 0,
@@ -89,4 +106,4 @@ function collect(info, callback) {
 }
 
 
-module.exports = {addUser, findUser, collect};
+module.exports = {addUser, findUser, collect, findUserById};

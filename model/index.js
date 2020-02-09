@@ -21,7 +21,7 @@ let singersSchema = {
     singer_name: String
 }
 
-mongoose.model("user",userSchema);
+mongoose.model("users",userSchema);
 
 mongoose.model("albums",albumsSchema);
 

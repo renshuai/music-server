@@ -46,4 +46,10 @@ router.post('/update', function(req, res, next) {
     }
 });
 
+router.post('/init', function(req, res, next) {
+    singersDao.initSingersData(function (response) {
+        res.json(response);
+    })
+});
+
 module.exports = router;

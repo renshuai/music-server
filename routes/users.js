@@ -39,11 +39,11 @@ router.post('/register', function(req, res, next) {
   if (userInfo) {
     usersDao.addUser(userInfo, function (response) {
       if (response.code == 0) {
-        let users = response.users;
+        let user = response.user;
         res.json({
           code: 0,
           msg: '注册成功',
-          userId: users[0]['_id']
+          userId: user['_id']
         })
       } else if (response.code == 1) {
         res.json({
